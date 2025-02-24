@@ -1,5 +1,7 @@
 import com.vanniktech.maven.publish.SonatypeHost
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import java.io.FileNotFoundException
+import java.util.Properties
 
 plugins {
     alias(libs.plugins.androidLibrary)
@@ -8,8 +10,10 @@ plugins {
     alias(libs.plugins.kotlinSerialization)
 }
 
+val properties = loadProperties()
+
 group = "io.github.giovanniandreuzza"
-version = "1.0.0"
+version = properties.getVersion()
 
 kotlin {
     explicitApi()
@@ -63,7 +67,7 @@ mavenPublishing {
     coordinates(
         groupId = "io.github.giovanniandreuzza",
         artifactId = "explicitarchitecture",
-        version = "1.0.0"
+        version = properties.getVersion()
     )
 
     // Configure POM metadata for the published artifact
@@ -101,3 +105,15 @@ mavenPublishing {
     // Enable GPG signing for all publications
     signAllPublications()
 }
+
+fun loadProperties() = rootProject.file("versions.properties").let {
+    if (!it.exists()) {
+        throw FileNotFoundException("File ${it.absolutePath} not found")
+    }
+
+    Properties().also { properties ->
+        properties.load(it.inputStream())
+    }
+}
+
+fun Properties.getVersion() = getProperty("VERSION") ?: "1.0.0"
