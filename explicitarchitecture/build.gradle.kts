@@ -62,6 +62,33 @@ android {
     }
 }
 
+tasks.register("generateReadme") {
+    val readmeTemplatePath = rootProject.file("README.md.template").absolutePath
+    val readmePath = rootProject.file("README.md").absolutePath
+    val versionFilePath = rootProject.file("versions.properties").absolutePath
+
+    inputs.file(readmeTemplatePath)
+    outputs.file(readmePath)
+
+    doLast {
+        val version = File(versionFilePath)
+            .readLines()
+            .first { it.startsWith("VERSION=") }
+            .substringAfter("=")
+
+        val content = File(readmeTemplatePath).readText().replace(
+            oldValue = "explicitarchitecture:\$VERSION",
+            newValue = "explicitarchitecture:$version"
+        )
+
+        File(readmePath).writeText(content)
+    }
+}
+
+tasks.build {
+    dependsOn("generateReadme")
+}
+
 mavenPublishing {
     // Define coordinates for the published artifact
     coordinates(

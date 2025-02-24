@@ -12,11 +12,13 @@ import kotlinx.coroutines.launch
 import kotlin.reflect.KClass
 
 /**
- * Event Bus Adapter.
+ * An adapter implementation of the [EventBus] interface that handles event publishing and subscription
+ * using Kotlin coroutines and flows.
  *
+ * @property eventBusScope The coroutine scope in which event handling operations will be executed
  * @author Giovanni Andreuzza
  */
-internal class EventBusAdapter(
+public class EventBusAdapter(
     private val eventBusScope: CoroutineScope
 ) : EventBus<Event>, Infrastructure {
 
