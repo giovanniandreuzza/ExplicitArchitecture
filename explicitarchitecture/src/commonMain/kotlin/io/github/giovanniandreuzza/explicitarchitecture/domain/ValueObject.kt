@@ -7,6 +7,9 @@ package io.github.giovanniandreuzza.explicitarchitecture.domain
  */
 public abstract class ValueObject : Domain {
 
+    /**
+     * Structural equality.
+     */
     override fun equals(other: Any?): Boolean {
         if (other == null || other !is ValueObject) {
             return false

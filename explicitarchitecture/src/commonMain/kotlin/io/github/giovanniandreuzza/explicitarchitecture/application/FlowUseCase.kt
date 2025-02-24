@@ -5,17 +5,17 @@ import kotlinx.coroutines.flow.Flow
 /**
  * Flow Use Case.
  *
+ * @param Params the parameters to execute the use case
+ * @param Response the response of the use case
  * @author Giovanni Andreuzza
  */
-public abstract class FlowUseCase<out T : Application, in Params> : Application {
+public interface FlowUseCase<in Params : Application, out Response : Application> : Application {
 
-    protected abstract suspend fun buildUseCase(params: Params): Flow<T>
-
-    /***
-     * Execute asynchronously an api call.
+    /**
+     * Execute asynchronously the use case.
      *
-     * @params the parameters of the call
-     * @return the response after launching the call
+     * @params the parameters [Params] to execute the use case
+     * @return [Flow] with the response [Response]
      */
-    public suspend fun execute(params: Params): Flow<T> = buildUseCase(params)
+    public suspend fun execute(params: Params): Flow<Response>
 }
