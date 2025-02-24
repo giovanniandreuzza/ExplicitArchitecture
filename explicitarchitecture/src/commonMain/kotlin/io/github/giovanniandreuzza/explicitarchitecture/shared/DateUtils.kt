@@ -1,4 +1,4 @@
-package io.github.giovanniandreuzza.explicitarchitecture.utils
+package io.github.giovanniandreuzza.explicitarchitecture.shared
 
 import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
@@ -14,9 +14,9 @@ import kotlinx.datetime.toLocalDateTime
 public object DateUtils {
 
     /**
-     * Get the current moment.
+     * Get the current time.
      *
-     * @return The current moment.
+     * @return [LocalDateTime] current time.
      */
     public fun now(): LocalDateTime {
         val currentMoment: Instant = Clock.System.now()

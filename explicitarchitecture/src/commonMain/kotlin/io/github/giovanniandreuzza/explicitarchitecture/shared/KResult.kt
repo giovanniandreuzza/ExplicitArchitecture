@@ -1,4 +1,4 @@
-package io.github.giovanniandreuzza.explicitarchitecture.utils
+package io.github.giovanniandreuzza.explicitarchitecture.shared
 
 import kotlin.contracts.ExperimentalContracts
 import kotlin.contracts.InvocationKind
@@ -37,6 +37,11 @@ public class Success<T>(public val value: T) : KResult<T, Nothing>()
  */
 public class Failure<out E : KError>(public val error: E) : KResult<Nothing, E>()
 
+/**
+ * Check if [KResult] is [Success].
+ *
+ * @return true if [KResult] is [Success], false otherwise
+ */
 @OptIn(ExperimentalContracts::class)
 public fun <T, E : KError> KResult<T, E>.isSuccess(): Boolean {
     contract {
@@ -46,6 +51,11 @@ public fun <T, E : KError> KResult<T, E>.isSuccess(): Boolean {
     return this is Success<T>
 }
 
+/**
+ * Check if [KResult] is [Failure].
+ *
+ * @return true if [KResult] is [Failure], false otherwise
+ */
 @OptIn(ExperimentalContracts::class)
 public fun <T, E : KError> KResult<T, E>.isFailure(): Boolean {
     contract {
@@ -61,7 +71,7 @@ public fun <T, E : KError> KResult<T, E>.isFailure(): Boolean {
  * @throws ClassCastException if [KResult] is not [Success]
  */
 public fun <T, E : KError> KResult<T, E>.asSuccess(): Success<T> {
-    return this as Success
+    return this as Success<T>
 }
 
 /**
@@ -70,9 +80,15 @@ public fun <T, E : KError> KResult<T, E>.asSuccess(): Success<T> {
  * @throws ClassCastException if [KResult] is not [Failure]
  */
 public fun <T, E : KError> KResult<T, E>.asFailure(): Failure<E> {
-    return this as Failure
+    return this as Failure<E>
 }
 
+/**
+ * Invoke [action] if [KResult] is [Success].
+ *
+ * @param action action to invoke
+ * @return [KResult] value
+ */
 @OptIn(ExperimentalContracts::class)
 public inline fun <T, E : KError> KResult<T, E>.onSuccess(action: (value: T) -> Unit): KResult<T, E> {
     contract {
@@ -82,6 +98,12 @@ public inline fun <T, E : KError> KResult<T, E>.onSuccess(action: (value: T) -> 
     return this
 }
 
+/**
+ * Invoke [action] if [KResult] is [Failure].
+ *
+ * @param action action to invoke
+ * @return [KResult] value
+ */
 @OptIn(ExperimentalContracts::class)
 public inline fun <T, E : KError> KResult<T, E>.onFailure(action: (error: E) -> Unit): KResult<T, E> {
     contract {
@@ -91,6 +113,13 @@ public inline fun <T, E : KError> KResult<T, E>.onFailure(action: (error: E) -> 
     return this
 }
 
+/**
+ * Fold [KResult].
+ *
+ * @param onSuccess action to invoke if [KResult] is [Success]
+ * @param onFailure action to invoke if [KResult] is [Failure]
+ * @return [KResult] value
+ */
 @OptIn(ExperimentalContracts::class)
 public inline fun <T, E : KError> KResult<T, E>.fold(
     onSuccess: (T) -> Unit,

@@ -1,4 +1,4 @@
-package io.github.giovanniandreuzza.explicitarchitecture.utils
+package io.github.giovanniandreuzza.explicitarchitecture.shared
 
 /**
  * KError.
