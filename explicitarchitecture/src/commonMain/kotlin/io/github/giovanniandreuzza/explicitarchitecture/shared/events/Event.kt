@@ -1,4 +1,4 @@
-package io.github.giovanniandreuzza.explicitarchitecture.events
+package io.github.giovanniandreuzza.explicitarchitecture.shared.events
 
 import kotlinx.datetime.LocalDateTime
 
@@ -8,5 +8,9 @@ import kotlinx.datetime.LocalDateTime
  * @author Giovanni Andreuzza
  */
 public interface Event {
+
+    /**
+     * Get the time when the event occurred.
+     */
     public val occurredOn: LocalDateTime
 }
