@@ -1,0 +1,42 @@
+[versions]
+## Kotlin
+kotlin = "2.1.0"
+
+## Vanniktech-mavenPublish
+vanniktech_mavenPublish_version = "0.29.0"
+
+## KotlinX - Coroutines
+kotlinxCoroutinesCore = "1.10.1"
+
+## KotlinX - Serialization Plugin
+plugin_kotlin_serialiaztion = "1.9.10"
+
+## KotlinX - Serialization
+kotlinx_serialization_version = "1.8.0"
+
+## KotlinX - DateTime
+kotlinx_datetime_version = "0.6.1"
+
+## Andoid
+android-compileSdk = "35"
+android-minSdk = "16"
+agp = "8.8.1"
+
+[libraries]
+## KotlinX - Coroutines
+kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinxCoroutinesCore" }
+
+## KotlinX - Serialization
+kotlinx_serialization_json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx_serialization_version" }
+
+## KotlinX - DateTime
+kotlinx_datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinx_datetime_version" }
+
+## Test
+kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
+
+[plugins]
+androidLibrary = { id = "com.android.library", version.ref = "agp" }
+kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+kotlinSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "plugin_kotlin_serialiaztion" }
+vanniktech-mavenPublish = { id = "com.vanniktech.maven.publish", version.ref = "vanniktech_mavenPublish_version" }
