@@ -61,7 +61,7 @@ Add `explicitarchitecture` to your `build.gradle` dependencies.
 
 ```
 dependencies {
-    implementation 'io.github.giovanniandreuzza:explicitarchitecture:1.3.0'
+    implementation 'io.github.giovanniandreuzza:explicitarchitecture:1.3.1'
 }
 ```
 

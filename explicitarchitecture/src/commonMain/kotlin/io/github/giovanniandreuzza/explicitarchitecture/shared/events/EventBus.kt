@@ -31,7 +31,7 @@ public interface EventBus<T : Event> {
      * @param eventType the event type [KClass] of [E]
      * @param handler the event handler [EventHandler] of [E]
      */
-    public fun <E : Event> registerHandler(eventType: KClass<E>, handler: EventHandler<E>)
+    public fun <E : T> registerHandler(eventType: KClass<E>, handler: EventHandler<E>)
 
     /**
      * Start the event bus.

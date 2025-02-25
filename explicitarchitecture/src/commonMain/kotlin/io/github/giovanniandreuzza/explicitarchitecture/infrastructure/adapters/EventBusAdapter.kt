@@ -16,31 +16,32 @@ import kotlin.reflect.KClass
  * An adapter for the [EventBus] port that handles event publishing and subscription
  * using Kotlin coroutines and flows.
  *
+ * @param T The type of event that will be handled by the event bus
  * @property eventBusScope The coroutine scope in which event handling operations will be executed
  * @author Giovanni Andreuzza
  */
 @IsAdapter
-public class EventBusAdapter(
+public class EventBusAdapter<T : Event>(
     private val eventBusScope: CoroutineScope
-) : EventBus<Event> {
+) : EventBus<T> {
 
-    private val _events = MutableStateFlow<List<Event>>(emptyList())
-    private val handlerMap = mutableMapOf<KClass<out Event>, MutableList<EventHandler<out Event>>>()
+    private val _events = MutableStateFlow<List<T>>(emptyList())
+    private val handlerMap = mutableMapOf<KClass<out T>, MutableList<EventHandler<out T>>>()
     private var job: Job? = null
 
-    override fun publish(event: Event) {
+    override fun publish(event: T) {
         _events.update {
             listOf(event)
         }
     }
 
-    override fun publishAll(events: List<Event>) {
+    override fun publishAll(events: List<T>) {
         _events.update {
             events
         }
     }
 
-    override fun <E : Event> registerHandler(
+    override fun <E : T> registerHandler(
         eventType: KClass<E>,
         handler: EventHandler<E>
     ) {
@@ -67,7 +68,7 @@ public class EventBusAdapter(
                         it.value.forEach { handler ->
                             // We know that the handler is of the correct type because of the filter
                             @Suppress("UNCHECKED_CAST")
-                            (handler as EventHandler<Event>).handle(event)
+                            (handler as EventHandler<T>).handle(event)
                         }
                     }
                 }
