@@ -10,6 +10,6 @@ import io.github.giovanniandreuzza.explicitarchitecture.presentation.IsPresentat
  * @author Giovanni Andreuzza
  */
 @IsPresentation
-@Target(AnnotationTarget.CLASS)
+@Target(AnnotationTarget.CLASS, AnnotationTarget.FUNCTION)
 @Retention(AnnotationRetention.RUNTIME)
 public annotation class IsPresentationMapper
