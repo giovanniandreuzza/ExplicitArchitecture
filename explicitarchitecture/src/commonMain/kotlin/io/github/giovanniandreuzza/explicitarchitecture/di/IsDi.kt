@@ -6,6 +6,6 @@ package io.github.giovanniandreuzza.explicitarchitecture.di
  *
  * @author Giovanni Andreuzza
  */
-@Target(AnnotationTarget.CLASS)
+@Target(AnnotationTarget.CLASS, AnnotationTarget.FUNCTION)
 @Retention(AnnotationRetention.RUNTIME)
 public annotation class IsDi
