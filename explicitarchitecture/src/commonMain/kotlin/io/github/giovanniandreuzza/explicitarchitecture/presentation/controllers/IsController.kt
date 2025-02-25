@@ -4,8 +4,8 @@ import io.github.giovanniandreuzza.explicitarchitecture.presentation.IsPresentat
 
 /**
  * Is Controller.
- * A controller is responsible for handling the incoming interactions and asks the coordinator
- * to invoke the appropriate application component.
+ * A controller is responsible for receiving requests from a presentation driver and invokes the
+ * appropriate application component to carry out the requested action.
  *
  * @author Giovanni Andreuzza
  */

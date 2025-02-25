@@ -3,8 +3,8 @@ package io.github.giovanniandreuzza.explicitarchitecture.core.ports
 import io.github.giovanniandreuzza.explicitarchitecture.core.application.IsApplication
 
 /**
- * Is Driven Port.
- * A driven port provides an abstraction for retrieving and persisting aggregates or entities,
+ * Is Port.
+ * A port provides an abstraction for retrieving and persisting aggregates or entities,
  * hiding the details of the data store.
  *
  * @author Giovanni Andreuzza
@@ -12,4 +12,4 @@ import io.github.giovanniandreuzza.explicitarchitecture.core.application.IsAppli
 @IsApplication
 @Target(AnnotationTarget.CLASS)
 @Retention(AnnotationRetention.RUNTIME)
-public annotation class IsDrivenPort
+public annotation class IsPort
