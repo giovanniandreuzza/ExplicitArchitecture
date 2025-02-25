@@ -1,11 +1,14 @@
 package io.github.giovanniandreuzza.explicitarchitecture.domain
 
+import io.github.giovanniandreuzza.explicitarchitecture.domain.annotations.IsValueObject
+
 /**
  * Value Object.
  *
  * @author Giovanni Andreuzza
  */
-public abstract class ValueObject : Domain {
+@IsValueObject
+public abstract class ValueObject {
 
     /**
      * Structural equality.

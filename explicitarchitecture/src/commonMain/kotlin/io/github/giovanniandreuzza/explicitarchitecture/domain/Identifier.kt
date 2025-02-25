@@ -1,11 +1,14 @@
 package io.github.giovanniandreuzza.explicitarchitecture.domain
 
+import io.github.giovanniandreuzza.explicitarchitecture.domain.annotations.IsDomain
+
 /**
  * Identifier.
  *
  * @author Giovanni Andreuzza
  */
-public abstract class Identifier<ID>(public open val id: ID) : Domain {
+@IsDomain
+public abstract class Identifier<ID>(public open val id: ID) {
 
     override fun equals(other: Any?): Boolean {
         if (other == null) return false
@@ -19,9 +22,7 @@ public abstract class Identifier<ID>(public open val id: ID) : Domain {
     }
 
     override fun hashCode(): Int {
-        var result = id.hashCode()
-        result = 31 * result + id.hashCode()
-        return result
+        return id.hashCode()
     }
 
 }

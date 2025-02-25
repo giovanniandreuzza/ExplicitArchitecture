@@ -1,11 +1,14 @@
 package io.github.giovanniandreuzza.explicitarchitecture.domain
 
+import io.github.giovanniandreuzza.explicitarchitecture.domain.annotations.IsEntity
+
 /**
  * Entity.
  *
  * @author Giovanni Andreuzza
  */
-public abstract class Entity<ID>(private val _id: ID) : Domain {
+@IsEntity
+public abstract class Entity<ID>(private val _id: ID) {
 
     public val entityId: EntityId<ID>
         get() = EntityId(_id)
