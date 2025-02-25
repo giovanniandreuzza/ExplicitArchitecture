@@ -1,6 +1,6 @@
 package io.github.giovanniandreuzza.explicitarchitecture.shared.events
 
-import io.github.giovanniandreuzza.explicitarchitecture.shared.annotations.IsShared
+import io.github.giovanniandreuzza.explicitarchitecture.shared.IsShared
 
 /**
  * Event Handler.
