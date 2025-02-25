@@ -11,9 +11,6 @@ kotlinxCoroutinesCore = "1.10.1"
 ## KotlinX - Serialization Plugin
 plugin_kotlin_serialiaztion = "1.9.10"
 
-## KotlinX - Serialization
-kotlinx_serialization_version = "1.8.0"
-
 ## KotlinX - DateTime
 kotlinx_datetime_version = "0.6.1"
 
@@ -25,9 +22,6 @@ agp = "8.8.1"
 [libraries]
 ## KotlinX - Coroutines
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinxCoroutinesCore" }
-
-## KotlinX - Serialization
-kotlinx_serialization_json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx_serialization_version" }
 
 ## KotlinX - DateTime
 kotlinx_datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinx_datetime_version" }

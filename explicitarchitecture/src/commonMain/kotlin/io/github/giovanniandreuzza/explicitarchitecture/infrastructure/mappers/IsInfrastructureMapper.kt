@@ -10,6 +10,6 @@ import io.github.giovanniandreuzza.explicitarchitecture.infrastructure.IsInfrast
  * @author Giovanni Andreuzza
  */
 @IsInfrastructure
-@Target(AnnotationTarget.CLASS)
+@Target(AnnotationTarget.CLASS, AnnotationTarget.FUNCTION)
 @Retention(AnnotationRetention.RUNTIME)
 public annotation class IsInfrastructureMapper

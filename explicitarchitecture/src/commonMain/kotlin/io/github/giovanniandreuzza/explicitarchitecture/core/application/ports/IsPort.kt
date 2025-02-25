@@ -1,4 +1,4 @@
-package io.github.giovanniandreuzza.explicitarchitecture.core.ports
+package io.github.giovanniandreuzza.explicitarchitecture.core.application.ports
 
 import io.github.giovanniandreuzza.explicitarchitecture.core.application.IsApplication
 
