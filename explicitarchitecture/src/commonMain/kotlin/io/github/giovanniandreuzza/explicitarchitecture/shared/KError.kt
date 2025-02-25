@@ -1,5 +1,7 @@
 package io.github.giovanniandreuzza.explicitarchitecture.shared
 
+import io.github.giovanniandreuzza.explicitarchitecture.shared.annotations.IsShared
+
 /**
  * KError.
  *
@@ -8,6 +10,7 @@ package io.github.giovanniandreuzza.explicitarchitecture.shared
  * @param cause   error cause.
  * @author Giovanni Andreuzza
  */
+@IsShared
 public open class KError(
     public open val code: String,
     public open val message: String,

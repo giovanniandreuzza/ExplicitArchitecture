@@ -77,8 +77,8 @@ tasks.register("generateReadme") {
             .substringAfter("=")
 
         val content = File(readmeTemplatePath).readText().replace(
-            oldValue = "explicitarchitecture:\$VERSION",
-            newValue = "explicitarchitecture:$version"
+            oldValue = "\$VERSION",
+            newValue = version
         )
 
         File(readmePath).writeText(content)

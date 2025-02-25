@@ -1,10 +1,13 @@
 package io.github.giovanniandreuzza.explicitarchitecture.domain
 
+import io.github.giovanniandreuzza.explicitarchitecture.domain.annotations.IsAggregateRoot
+
 /**
  * Aggregate Root.
  *
  * @author Giovanni Andreuzza
  */
+@IsAggregateRoot
 public abstract class AggregateRoot<ID>(id: ID, version: Int) : Entity<ID>(id) {
 
     public var version: Int = version

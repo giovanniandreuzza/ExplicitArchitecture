@@ -1,5 +1,6 @@
 package io.github.giovanniandreuzza.explicitarchitecture.application
 
+import io.github.giovanniandreuzza.explicitarchitecture.application.annotations.IsApplicationEvent
 import io.github.giovanniandreuzza.explicitarchitecture.shared.events.Event
 
 /**
@@ -7,4 +8,5 @@ import io.github.giovanniandreuzza.explicitarchitecture.shared.events.Event
  *
  * @author Giovanni Andreuzza
  */
-public interface ApplicationEvent : Event, Application
+@IsApplicationEvent
+public interface ApplicationEvent : Event

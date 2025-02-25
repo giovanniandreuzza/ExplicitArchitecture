@@ -1,5 +1,6 @@
 package io.github.giovanniandreuzza.explicitarchitecture.shared
 
+import io.github.giovanniandreuzza.explicitarchitecture.shared.annotations.IsShared
 import kotlin.contracts.ExperimentalContracts
 import kotlin.contracts.InvocationKind
 import kotlin.contracts.contract
@@ -11,6 +12,7 @@ import kotlin.contracts.contract
  * @param E the error type extending [KError]
  * @author Giovanni Andreuzza
  */
+@IsShared
 public sealed class KResult<out T, out E : KError> {
 
     override fun toString(): String {
@@ -27,6 +29,7 @@ public sealed class KResult<out T, out E : KError> {
  * @param value the success value
  * @return [KResult] with [value] as success value
  */
+@IsShared
 public class Success<T>(public val value: T) : KResult<T, Nothing>()
 
 /**
@@ -35,6 +38,7 @@ public class Success<T>(public val value: T) : KResult<T, Nothing>()
  * @param error the error value
  * @return [KResult] with [error] as error value
  */
+@IsShared
 public class Failure<out E : KError>(public val error: E) : KResult<Nothing, E>()
 
 /**
@@ -43,6 +47,7 @@ public class Failure<out E : KError>(public val error: E) : KResult<Nothing, E>(
  * @return true if [KResult] is [Success], false otherwise
  */
 @OptIn(ExperimentalContracts::class)
+@IsShared
 public fun <T, E : KError> KResult<T, E>.isSuccess(): Boolean {
     contract {
         returns(true) implies (this@isSuccess is Success<T>)
@@ -57,6 +62,7 @@ public fun <T, E : KError> KResult<T, E>.isSuccess(): Boolean {
  * @return true if [KResult] is [Failure], false otherwise
  */
 @OptIn(ExperimentalContracts::class)
+@IsShared
 public fun <T, E : KError> KResult<T, E>.isFailure(): Boolean {
     contract {
         returns(false) implies (this@isFailure is Success<T>)
@@ -70,6 +76,7 @@ public fun <T, E : KError> KResult<T, E>.isFailure(): Boolean {
  *
  * @throws ClassCastException if [KResult] is not [Success]
  */
+@IsShared
 public fun <T, E : KError> KResult<T, E>.asSuccess(): Success<T> {
     return this as Success<T>
 }
@@ -79,6 +86,7 @@ public fun <T, E : KError> KResult<T, E>.asSuccess(): Success<T> {
  *
  * @throws ClassCastException if [KResult] is not [Failure]
  */
+@IsShared
 public fun <T, E : KError> KResult<T, E>.asFailure(): Failure<E> {
     return this as Failure<E>
 }
@@ -90,6 +98,7 @@ public fun <T, E : KError> KResult<T, E>.asFailure(): Failure<E> {
  * @return [KResult] value
  */
 @OptIn(ExperimentalContracts::class)
+@IsShared
 public inline fun <T, E : KError> KResult<T, E>.onSuccess(action: (value: T) -> Unit): KResult<T, E> {
     contract {
         callsInPlace(action, InvocationKind.AT_MOST_ONCE)
@@ -105,6 +114,7 @@ public inline fun <T, E : KError> KResult<T, E>.onSuccess(action: (value: T) -> 
  * @return [KResult] value
  */
 @OptIn(ExperimentalContracts::class)
+@IsShared
 public inline fun <T, E : KError> KResult<T, E>.onFailure(action: (error: E) -> Unit): KResult<T, E> {
     contract {
         callsInPlace(action, InvocationKind.AT_MOST_ONCE)
@@ -121,6 +131,7 @@ public inline fun <T, E : KError> KResult<T, E>.onFailure(action: (error: E) -> 
  * @return [KResult] value
  */
 @OptIn(ExperimentalContracts::class)
+@IsShared
 public inline fun <T, E : KError> KResult<T, E>.fold(
     onSuccess: (T) -> Unit,
     onFailure: (E) -> Unit
@@ -138,6 +149,12 @@ public inline fun <T, E : KError> KResult<T, E>.fold(
     return this
 }
 
+/**
+ * Map the given value to [KResult].
+ *
+ * @return [KResult] with [E] if this is a subclass of [E], [Success] otherwise
+ */
+@IsShared
 public inline fun <T, reified E : KError> T.toResult(): KResult<T, E> {
     if (this is E) {
         return Failure(this)
@@ -145,6 +162,12 @@ public inline fun <T, reified E : KError> T.toResult(): KResult<T, E> {
     return Success(this)
 }
 
+/**
+ * Map the given nullable value to [KResult].
+ *
+ * @return [KResult] with [E] if this is a subclass of [E], [Success] otherwise
+ */
+@IsShared
 public inline fun <T, reified E : KError> T?.toResultOrSuccess(value: () -> T): KResult<T, E> {
     if (this == null) {
         return Success(value())
@@ -155,6 +178,12 @@ public inline fun <T, reified E : KError> T?.toResultOrSuccess(value: () -> T): 
     return Success(this)
 }
 
+/**
+ * Map the given nullable value to [KResult].
+ *
+ * @return [KResult] with [E] if this is a subclass of [E] or if this is null, [Success] otherwise
+ */
+@IsShared
 public inline fun <T, reified E : KError> T?.toResultOrFailure(error: () -> E): KResult<T, E> {
     if (this == null) {
         return Failure(error())

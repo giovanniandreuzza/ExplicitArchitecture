@@ -1,5 +1,6 @@
 package io.github.giovanniandreuzza.explicitarchitecture.infrastructure
 
+import io.github.giovanniandreuzza.explicitarchitecture.infrastructure.annotations.IsAdapter
 import io.github.giovanniandreuzza.explicitarchitecture.shared.events.Event
 import io.github.giovanniandreuzza.explicitarchitecture.shared.events.EventBus
 import io.github.giovanniandreuzza.explicitarchitecture.shared.events.EventHandler
@@ -12,15 +13,17 @@ import kotlinx.coroutines.launch
 import kotlin.reflect.KClass
 
 /**
- * An adapter implementation of the [EventBus] interface that handles event publishing and subscription
+ * Event Bus Adapter.
+ * An adapter for the [EventBus] port that handles event publishing and subscription
  * using Kotlin coroutines and flows.
  *
  * @property eventBusScope The coroutine scope in which event handling operations will be executed
  * @author Giovanni Andreuzza
  */
+@IsAdapter
 public class EventBusAdapter(
     private val eventBusScope: CoroutineScope
-) : EventBus<Event>, Infrastructure {
+) : EventBus<Event> {
 
     private val _events = MutableStateFlow<List<Event>>(emptyList())
     private val handlerMap = mutableMapOf<KClass<out Event>, MutableList<EventHandler<out Event>>>()

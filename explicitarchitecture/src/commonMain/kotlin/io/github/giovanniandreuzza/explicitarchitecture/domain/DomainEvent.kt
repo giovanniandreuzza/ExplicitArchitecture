@@ -1,5 +1,6 @@
 package io.github.giovanniandreuzza.explicitarchitecture.domain
 
+import io.github.giovanniandreuzza.explicitarchitecture.domain.annotations.IsDomainEvent
 import io.github.giovanniandreuzza.explicitarchitecture.shared.events.Event
 
 /**
@@ -7,7 +8,8 @@ import io.github.giovanniandreuzza.explicitarchitecture.shared.events.Event
  *
  * @author Giovanni Andreuzza
  */
-public interface DomainEvent<ID> : Event, Domain {
+@IsDomainEvent
+public interface DomainEvent<ID> : Event {
 
     /**
      * The aggregate id.

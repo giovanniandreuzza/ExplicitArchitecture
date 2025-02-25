@@ -1,5 +1,6 @@
 package io.github.giovanniandreuzza.explicitarchitecture.shared.events
 
+import io.github.giovanniandreuzza.explicitarchitecture.shared.annotations.IsEvent
 import kotlinx.datetime.LocalDateTime
 
 /**
@@ -7,6 +8,7 @@ import kotlinx.datetime.LocalDateTime
  *
  * @author Giovanni Andreuzza
  */
+@IsEvent
 public interface Event {
 
     /**

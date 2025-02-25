@@ -1,5 +1,6 @@
 package io.github.giovanniandreuzza.explicitarchitecture.shared.events
 
+import io.github.giovanniandreuzza.explicitarchitecture.shared.annotations.IsShared
 import kotlin.reflect.KClass
 
 /**
@@ -7,6 +8,7 @@ import kotlin.reflect.KClass
  *
  * @author Giovanni Andreuzza
  */
+@IsShared
 public interface EventBus<T : Event> {
 
     /**
