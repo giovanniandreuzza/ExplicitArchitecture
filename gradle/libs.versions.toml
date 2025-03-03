@@ -3,21 +3,21 @@
 kotlin = "2.1.0"
 
 ## Vanniktech-mavenPublish
-vanniktech_mavenPublish_version = "0.29.0"
+vanniktech_mavenPublish_version = "0.30.0"
 
 ## KotlinX - Coroutines
 kotlinxCoroutinesCore = "1.10.1"
 
 ## KotlinX - Serialization Plugin
-plugin_kotlin_serialiaztion = "1.9.10"
+plugin_kotlin_serialiaztion = "2.1.10"
 
 ## KotlinX - DateTime
-kotlinx_datetime_version = "0.6.1"
+kotlinx_datetime_version = "0.6.2"
 
 ## Andoid
 android-compileSdk = "35"
 android-minSdk = "16"
-agp = "8.8.1"
+agp = "8.8.2"
 
 [libraries]
 ## KotlinX - Coroutines

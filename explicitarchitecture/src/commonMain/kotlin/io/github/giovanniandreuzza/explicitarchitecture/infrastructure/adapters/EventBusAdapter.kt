@@ -67,8 +67,10 @@ public class EventBusAdapter<T : Event>(
                     }.forEach {
                         it.value.forEach { handler ->
                             // We know that the handler is of the correct type because of the filter
-                            @Suppress("UNCHECKED_CAST")
-                            (handler as EventHandler<T>).handle(event)
+                            launch {
+                                @Suppress("UNCHECKED_CAST")
+                                (handler as EventHandler<T>).handle(event)
+                            }
                         }
                     }
                 }
