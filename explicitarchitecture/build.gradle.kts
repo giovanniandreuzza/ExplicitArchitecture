@@ -10,10 +10,10 @@ plugins {
     alias(libs.plugins.kotlinSerialization)
 }
 
-val properties = loadProperties()
+val localProperties = loadProperties()
 
 group = "io.github.giovanniandreuzza"
-version = properties.getVersion()
+version = localProperties.getVersion()
 
 kotlin {
     explicitApi()
@@ -94,7 +94,7 @@ mavenPublishing {
     coordinates(
         groupId = "io.github.giovanniandreuzza",
         artifactId = "explicitarchitecture",
-        version = properties.getVersion()
+        version = localProperties.getVersion()
     )
 
     // Configure POM metadata for the published artifact

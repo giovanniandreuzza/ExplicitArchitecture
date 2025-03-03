@@ -16,6 +16,6 @@ public interface EventHandler<T : Event> {
      *
      * @param event the event
      */
-    public fun handle(event: T)
+    public suspend fun handle(event: T)
 
 }
