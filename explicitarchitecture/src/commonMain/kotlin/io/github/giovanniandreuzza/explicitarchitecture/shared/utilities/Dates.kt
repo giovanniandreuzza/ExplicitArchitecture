@@ -1,11 +1,9 @@
 package io.github.giovanniandreuzza.explicitarchitecture.shared.utilities
 
 import io.github.giovanniandreuzza.explicitarchitecture.shared.IsShared
-import kotlinx.datetime.Clock
-import kotlinx.datetime.Instant
-import kotlinx.datetime.LocalDateTime
-import kotlinx.datetime.TimeZone
-import kotlinx.datetime.toLocalDateTime
+import kotlin.time.Clock
+import kotlin.time.ExperimentalTime
+import kotlin.time.Instant
 
 /**
  * Dates.
@@ -18,10 +16,10 @@ public object Dates {
     /**
      * Get the current time.
      *
-     * @return [LocalDateTime] current time.
+     * @return [Instant] current time.
      */
-    public fun now(): LocalDateTime {
-        val currentMoment: Instant = Clock.System.now()
-        return currentMoment.toLocalDateTime(TimeZone.UTC)
+    @OptIn(ExperimentalTime::class)
+    public fun now(): Instant {
+        return Clock.System.now()
     }
 }

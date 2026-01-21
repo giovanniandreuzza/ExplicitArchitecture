@@ -1,6 +1,7 @@
 package io.github.giovanniandreuzza.explicitarchitecture.shared.events
 
-import kotlinx.datetime.LocalDateTime
+import kotlin.time.ExperimentalTime
+import kotlin.time.Instant
 
 /**
  * Event.
@@ -13,5 +14,6 @@ public interface Event {
     /**
      * Get the time when the event occurred.
      */
-    public val occurredOn: LocalDateTime
+    @OptIn(ExperimentalTime::class)
+    public val occurredOn: Instant
 }

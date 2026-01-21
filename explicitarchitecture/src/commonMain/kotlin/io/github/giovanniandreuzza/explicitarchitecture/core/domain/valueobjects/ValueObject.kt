@@ -6,13 +6,13 @@ package io.github.giovanniandreuzza.explicitarchitecture.core.domain.valueobject
  * @author Giovanni Andreuzza
  */
 @IsValueObject
-public abstract class ValueObject {
+public abstract class ValueObject<T>(public val value: T) {
 
     /**
      * Structural equality.
      */
     override fun equals(other: Any?): Boolean {
-        if (other == null || other !is ValueObject) {
+        if (other == null || other !is ValueObject<T>) {
             return false
         }
 
@@ -20,7 +20,7 @@ public abstract class ValueObject {
             return true
         }
 
-        return toString() == other.toString()
+        return value == other.value
     }
 
     override fun hashCode(): Int {

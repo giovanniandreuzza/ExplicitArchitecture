@@ -73,26 +73,6 @@ public fun <T, E : KError> KResult<T, E>.isFailure(): Boolean {
 }
 
 /**
- * Force casts [KResult] to [Success].
- *
- * @throws ClassCastException if [KResult] is not [Success]
- */
-@IsShared
-public fun <T, E : KError> KResult<T, E>.asSuccess(): Success<T> {
-    return this as Success<T>
-}
-
-/**
- * Force casts [KResult] to [Failure].
- *
- * @throws ClassCastException if [KResult] is not [Failure]
- */
-@IsShared
-public fun <T, E : KError> KResult<T, E>.asFailure(): Failure<E> {
-    return this as Failure<E>
-}
-
-/**
  * Invoke [action] if [KResult] is [Success].
  *
  * @param action action to invoke
@@ -193,4 +173,18 @@ public inline fun <T, reified E : KError> T?.toResultOrFailure(error: () -> E): 
         return Failure(this)
     }
     return Success(this)
+}
+
+/**
+ * Get the value or invoke [onError] if [KResult] is [Failure].
+ *
+ * @param onError action to invoke if [KResult] is [Failure]
+ * @return the value [T] if [KResult] is [Success], result of [onError] otherwise
+ */
+@IsShared
+public inline fun <T, E : KError> KResult<T, E>.getOr(onError: (E) -> T): T {
+    return when (this) {
+        is Success -> value
+        is Failure -> onError(error)
+    }
 }

@@ -1,6 +1,7 @@
 package io.github.giovanniandreuzza.explicitarchitecture.shared.events
 
 import io.github.giovanniandreuzza.explicitarchitecture.shared.IsShared
+import io.github.giovanniandreuzza.explicitarchitecture.shared.errors.KError
 import kotlin.reflect.KClass
 
 /**
@@ -38,7 +39,7 @@ public interface EventBus<T : Event> {
      *
      * @param onError callback for error handling
      */
-    public fun start(onError: (Throwable) -> Unit)
+    public fun start(onError: (KError) -> Unit)
 
     /**
      * Stop the event bus.

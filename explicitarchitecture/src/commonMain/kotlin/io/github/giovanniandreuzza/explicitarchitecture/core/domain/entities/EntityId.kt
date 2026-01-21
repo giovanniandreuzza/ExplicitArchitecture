@@ -6,4 +6,4 @@ package io.github.giovanniandreuzza.explicitarchitecture.core.domain.entities
  * @author Giovanni Andreuzza
  */
 @IsEntityId
-public class EntityId<ID>(override val id: ID) : Identifier<ID>(id)
+public class EntityId<ID>(id: ID) : Identifier<ID>(id)

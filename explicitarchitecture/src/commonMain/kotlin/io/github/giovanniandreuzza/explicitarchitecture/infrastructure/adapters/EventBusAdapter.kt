@@ -1,5 +1,6 @@
 package io.github.giovanniandreuzza.explicitarchitecture.infrastructure.adapters
 
+import io.github.giovanniandreuzza.explicitarchitecture.shared.errors.KError
 import io.github.giovanniandreuzza.explicitarchitecture.shared.events.Event
 import io.github.giovanniandreuzza.explicitarchitecture.shared.events.EventBus
 import io.github.giovanniandreuzza.explicitarchitecture.shared.events.EventHandler
@@ -49,14 +50,20 @@ public class EventBusAdapter<T : Event>(
     }
 
     override fun start(
-        onError: (Throwable) -> Unit
+        onError: (KError) -> Unit
     ) {
-        if (job != null && job!!.isActive) {
+        if (job != null && job?.isActive == true) {
             return
         }
 
         val exceptionHandler = CoroutineExceptionHandler { _, exception ->
-            onError(exception)
+            onError(
+                KError(
+                    code = "event_bus_error",
+                    message = "An error occurred in the Event Bus: ${exception.message}",
+                    cause = null
+                )
+            )
         }
 
         job = eventBusScope.launch(exceptionHandler) {

@@ -14,7 +14,7 @@ import io.github.giovanniandreuzza.explicitarchitecture.shared.IsShared
 public open class KError(
     public open val code: String,
     public open val message: String,
-    public open val cause: String? = null
+    public open val cause: KError? = null
 ) {
 
     override fun toString(): String {
